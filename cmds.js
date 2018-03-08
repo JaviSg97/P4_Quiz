@@ -152,39 +152,7 @@ exports.showCmd = (rl, id) => {
  	     };
 
 exports.playCmd = rl =>{ 
-    let score = 0;
-    let toBeResolved = [];
-    for(let i = 0; i < model.count(); i++){
-        toBeResolved[i]= i;
-    }
 
-    const playOne = () => {
-    if (toBeResolved.length === 0){
-        log("No hay nada más que preguntar.");
-        log("Fin del juego. Aciertos: " + score);
-        biglog(score, 'magenta');
-        rl.prompt();
-    } else {
-        let k =  Math.floor(Math.random() * toBeResolved.length);
-        let quiz = model.getByIndex(toBeResolved[k]);
-        toBeResolved.splice(k, 1);
-        rl.question(colorize(quiz.question + '? ' ,'red') , respuesta =>{
-             respuesta = respuesta.toLowerCase().trim();
-                if (quiz.answer.toLowerCase().trim() === respuesta){
-                    score += 1;
-                    log('CORRECTO - Lleva ' + score + ' aciertos');
-                    playOne();
-                }
-                else {
-                    log('INCORRECTO');
-                     log("Fin del juego. Aciertos: " + score);
-                     biglog(score, 'magenta');
-                    rl.prompt();
-                }
-        });
-    };
-};
-    playOne();
 
 };
 
